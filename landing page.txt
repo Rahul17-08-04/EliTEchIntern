@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Nova — Turn More Visitors Into Customers</title>
+
+  <meta
+    name="description"
+    content="Nova helps modern businesses turn more website visitors into paying customers with powerful conversion tools."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #070a12;
+      --bg-soft: #0d111c;
+      --card: rgba(255,255,255,.055);
+      --card-hover: rgba(255,255,255,.085);
+      --text: #f7f8fc;
+      --muted: #9da5b8;
+      --primary: #7c5cff;
+      --primary-2: #a78bfa;
+      --cyan: #37d7ff;
+      --green: #55e6a5;
+      --border: rgba(255,255,255,.09);
+      --shadow: 0 30px 80px rgba(0,0,0,.35);
+      --radius: 22px;
+      --container: 1160px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(124,92,255,.16), transparent 28%),
+        radial-gradient(circle at 90% 15%, rgba(55,215,255,.10), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: .3s ease;
+    }
+
+    header.scrolled {
+      background: rgba(7,10,18,.78);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -.04em;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--cyan));
+      box-shadow: 0 8px 25px rgba(124,92,255,.35);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 34px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      transition: .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 13px 20px;
+      font-weight: 700;
+      color: white;
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #6845f5);
+      box-shadow: 0 10px 30px rgba(124,92,255,.28);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 15px 40px rgba(124,92,255,.42);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.055);
+      border: 1px solid var(--border);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      color: white;
+      border: 0;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 100vh;
+      padding: 160px 0 90px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 550px;
+      height: 550px;
+      left: 50%;
+      top: 30%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(124,92,255,.16), transparent 65%);
+      filter: blur(20px);
+      z-index: -1;
+      animation: pulse 5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.15); }
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid rgba(167,139,250,.25);
+      background: rgba(124,92,255,.08);
+      border-radius: 100px;
+      color: #cfc6ff;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--green);
+    }
+
+    h1 {
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(46px, 7vw, 82px);
+      line-height: .98;
+      letter-spacing: -.065em;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .gradient-text {
+      background: linear-gradient(
+        100deg,
+        #fff 10%,
+        #b7a9ff 45%,
+        #63ddff 90%
+      );
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      margin: 28px auto 34px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-actions .btn {
+      padding: 15px 24px;
+    }
+
+    .trust {
+      margin-top: 25px;
+      font-size: 13px;
+      color: #727b90;
+    }
+
+    /* ================= PRODUCT MOCKUP ================= */
+
+    .mockup-wrap {
+      margin-top: 80px;
+      perspective: 1200px;
+    }
+
+    .mockup {
+      max-width: 980px;
+      margin: auto;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+      background: rgba(11,15,27,.85);
+      box-shadow:
+        0 40px 100px rgba(0,0,0,.5),
+        0 0 100px rgba(124,92,255,.1);
+      overflow: hidden;
+      transform: rotateX(3deg);
+      transition: transform .6s ease;
+    }
+
+    .mockup:hover {
+      transform: rotateX(0deg) translateY(-5px);
+    }
+
+    .window-bar {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 15px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .window-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ff5f57;
+    }
+
+    .window-dot:nth-child(2) { background: #febc2e; }
+    .window-dot:nth-child(3) { background: #28c840; }
+
+    .dashboard {
+      padding: 25px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 20px;
+    }
+
+    .sidebar {
+      padding: 12px;
+      border-right: 1px solid var(--border);
+    }
+
+    .side-item {
+      padding: 11px;
+      margin-bottom: 6px;
+      color: #727b90;
+      border-radius: 9px;
+      font-size: 13px;
+    }
+
+    .side-item.active {
+      color: white;
+      background: rgba(124,92,255,.14);
+    }
+
+    .dashboard-main {
+      display: grid;
+      gap: 18px;
+    }
+
+    .dash-title {
+      font-family: "Manrope";
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .stat small {
+      color: #70798d;
+      font-size: 11px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      margin-top: 3px;
+    }
+
+    .chart {
+      height: 180px;
+      border-radius: 15px;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 45px 45px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ================= LOGOS ================= */
+
+    .logos {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logos-title {
+      text-align: center;
+      color: #667084;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      margin-bottom: 25px;
+    }
+
+    .logo-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(25px, 6vw, 70px);
+      flex-wrap: wrap;
+      color: #798196;
+      font-family: "Manrope";
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    /* ================= SECTIONS ================= */
+
+    section {
+      padding: 120px 0;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 55px;
+    }
+
+    .section-heading.center {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-label {
+      color: var(--primary-2);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: "Manrope";
+      font-size: clamp(34px, 5vw, 55px);
+      line-height: 1.05;
+      letter-spacing: -.05em;
+    }
+
+    .section-heading p {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    /* ================= FEATURES ================= */
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      padding: 30px;
+      min-height: 260px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      transition: .35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: var(--primary);
+      opacity: .08;
+      filter: blur(50px);
+      top: -50px;
+      right: -50px;
+    }
+
+    .feature:hover {
+      transform: translateY(-8px);
+      background: var(--card-hover);
+      border-color: rgba(167,139,250,.25);
+    }
+
+    .icon {
+      width: 47px;
+      height: 47px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(
+        135deg,
+        rgba(124,92,255,.18),
+        rgba(55,215,255,.08)
+      );
+      border: 1px solid rgba(167,139,250,.16);
+      font-size: 21px;
+      margin-bottom: 25px;
+    }
+
+    .feature h3 {
+      font-family: "Manrope";
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* ================= RESULTS ================= */
+
+    .results {
+      background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(124,92,255,.035),
+        transparent
+      );
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .check-list {
+      list-style: none;
+      margin-top: 30px;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 12px;
+      margin: 17px 0;
+      color: #c9ced9;
+    }
+
+    .check {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      background: rgba(85,230,165,.12);
+      color: var(--green);
+      border-radius: 50%;
+      font-size: 12px;
+    }
+
+    .results-card {
+      padding: 35px;
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 27px;
+    }
+
+    .metric:last-child {
+      margin-bottom: 0;
+    }
+
+    .metric-info span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .metric-info strong {
+      font-size: 32px;
+      font-family: "Manrope";
+    }
+
+    .metric-change {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 50px;
+      background: rgba(255,255,255,.06);
+      margin-top: 9px;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary), var(--cyan));
+      transition: width 1.5s ease;
+    }
+
+    /* ================= TESTIMONIAL ================= */
+
+    .testimonial {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .quote {
+      font-family: "Manrope";
+      font-size: clamp(25px, 4vw, 40px);
+      line-height: 1.25;
+      letter-spacing: -.035em;
+    }
+
+    .quote-author {
+      margin-top: 30px;
+      color: var(--muted);
+    }
+
+    .quote-author strong {
+      color: white;
+      display: block;
+    }
+
+    /* ================= PRICING ================= */
+
+    .pricing-toggle {
+      margin: -25px auto 45px;
+      width: fit-content;
+      display: flex;
+      gap: 5px;
+      padding: 5px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.035);
+    }
+
+    .toggle {
+      border: 0;
+      padding: 9px 17px;
+      border-radius: 100px;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .toggle.active {
+      color: white;
+      background: var(--primary);
+    }
+
+    .save {
+      color: var(--green);
+      margin-left: 3px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
+    }
+
+    .price-card {
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--card);
+      position: relative;
+    }
+
+    .price-card.featured {
+      border-color: rgba(124,92,255,.55);
+      box-shadow: 0 25px 70px rgba(124,92,255,.12);
+      transform: translateY(-8px);
+    }
+
+    .popular {
+      position: absolute;
+      top: -13px;
+      left: 25px;
+      padding: 5px 11px;
+      border-radius: 100px;
+      background: var(--primary);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .price-card h3 {
+      font-family: "Manrope";
+      font-size: 20px;
+    }
+
+    .price-card > p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 8px 0 22px;
+    }
+
+    .price {
+      font-family: "Manrope";
+      font-size: 45px;
+      letter-spacing: -.06em;
+    }
+
+    .price span {
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
+
+    .price-card ul {
+      list-style: none;
+      margin: 25px 0;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+
+    .price-card li {
+      margin: 12px 0;
+      color: #b9c0cf;
+      font-size: 13px;
+    }
+
+    .price-card li::before {
+      content: "✓";
+      color: var(--green);
+      margin-right: 9px;
+    }
+
+    .price-card .btn {
+      width: 100%;
+    }
+
+    /* ================= FAQ ================= */
+
+    .faq {
+      max-width: 780px;
+      margin: auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 23px 0;
+      background: none;
+      border: 0;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .faq-question span {
+      transition: transform .3s ease;
+      color: var(--primary-2);
+      font-size: 20px;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 14px;
+      transition: max-height .4s ease, padding .4s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding-bottom: 22px;
+    }
+
+    .faq-item.open .faq-question span {
+      transform: rotate(45deg);
+    }
+
+    /* ================= CTA ================= */
+
+    .cta {
+      padding-bottom: 120px;
+    }
+
+    .cta-box {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 80px 30px;
+      border-radius: 30px;
+      border: 1px solid rgba(167,139,250,.2);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(124,92,255,.28), transparent 60%),
+        rgba(255,255,255,.035);
+    }
+
+    .cta-box h2 {
+      max-width: 750px;
+      margin: auto;
+    }
+
+    .cta-box p {
+      max-width: 550px;
+      margin: 20px auto 28px;
+      color: var(--muted);
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 35px 0;
+      color: #687185;
+      font-size: 13px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    /* ================= ANIMATIONS ================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition:
+        opacity .8s ease,
+        transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 850px) {
+
+      .nav-links,
+      .nav-actions {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+
+      .nav.mobile-open {
+        position: relative;
+      }
+
+      .nav.mobile-open .nav-links {
+        display: flex;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        padding: 25px;
+        background: rgba(10,13,22,.97);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+      }
+
+      .hero {
+        padding-top: 135px;
+      }
+
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .features-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .price-card.featured {
+        transform: none;
+      }
+
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 90px 0;
+      }
+
+      .footer-content {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .container {
+        width: min(var(--container), calc(100% - 28px));
+      }
+
+      h1 {
+        font-size: 45px;
+      }
+
+      .hero-description {
+        font-size: 16px;
+      }
+
+      .mockup-wrap {
+        margin-top: 55px;
+      }
+
+      .mockup {
+        border-radius: 16px;
+      }
+
+      .dashboard {
+        padding: 15px;
+      }
+
+      .cta-box {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+
+  <header id="header">
+    <div class="container">
+      <nav class="nav" id="nav">
+
+        <a href="#" class="logo">
+          <span class="logo-mark">N</span>
+          Nova
+        </a>
+
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#results">Results</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </div>
+
+        <div class="nav-actions">
+          <a href="#pricing" class="btn btn-secondary">Sign in</a>
+          <a href="#cta" class="btn btn-primary">Start Free</a>
+        </div>
+
+        <button class="mobile-toggle" id="mobileToggle">
+          ☰
+        </button>
+
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="hero-content reveal">
+
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Trusted by 4,000+ growing businesses
+          </div>
+
+          <h1>
+            Turn more visitors into
+            <span class="gradient-text">customers.</span>
+          </h1>
+
+          <p class="hero-description">
+            Nova gives your business the tools to create better experiences,
+            understand your visitors, and convert more traffic into revenue —
+            without the complexity.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#cta" class="btn btn-primary">
+              Start for free →
+            </a>
+
+            <a href="#features" class="btn btn-secondary">
+              Explore features
+            </a>
+          </div>
+
+          <p class="trust">
+            No credit card required · 14-day free trial · Cancel anytime
+          </p>
+
+        </div>
+
+
+        <!-- Dashboard Preview -->
+
+        <div class="mockup-wrap reveal">
+
+          <div class="mockup">
+
+            <div class="window-bar">
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+            </div>
+
+            <div class="dashboard">
+
+              <aside class="sidebar">
+                <div class="side-item active">Overview</div>
+                <div class="side-item">Analytics</div>
+                <div class="side-item">Campaigns</div>
+                <div class="side-item">Customers</div>
+                <div class="side-item">Settings</div>
+              </aside>
+
+              <div class="dashboard-main">
+
+                <div class="dash-title">
+                  Conversion overview
+                </div>
+
+                <div class="stats">
+
+                  <div class="stat">
+                    <small>Visitors</small>
+                    <strong>128.4K</strong>
+                  </div>
+
+                  <div class="stat">
+                    <small>Conversions</small>
+                    <strong>18.7K</strong>
+                  </div>
+
+                  <div class="stat">
+                    <small>Revenue</small>
+                    <strong>$284K</strong>
+                  </div>
+
+                </div>
+
+                <div class="chart">
+
+                  <svg viewBox="0 0 900 180" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="chartGradient"
+                        x1="0" x2="1">
+                        <stop offset="0%" stop-color="#7c5cff"/>
+                        <stop offset="100%" stop-color="#37d7ff"/>
+                      </linearGradient>
+                    </defs>
+
+                    <path
+                      d="M0 150
+                         C70 145, 90 120, 150 128
+                         S220 105, 270 118
+                         S350 85, 400 102
+                         S480 90, 530 75
+                         S600 85, 650 58
+                         S730 65, 780 35
+                         S850 40, 900 12"
+                      fill="none"
+                      stroke="url(#chartGradient)"
+                      stroke-width="5"
+                    />
+
+                  </svg>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= LOGOS ================= -->
+
+    <section class="logos">
+
+      <div class="container">
+
+        <p class="logos-title">
+          Powering ambitious teams at
+        </p>
+
+        <div class="logo-row">
+          <span>vertex</span>
+          <span>ORBIT</span>
+          <span>luma</span>
+          <span>Northstar</span>
+          <span>Arc</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section id="features">
+
+      <div class="container">
+
+        <div class="section-heading center reveal">
+
+          <div class="section-label">
+            Everything you need
+          </div>
+
+          <h2>
+            Built to make growth
+            <span class="gradient-text">simpler.</span>
+          </h2>
+
+          <p>
+            Replace scattered tools and guesswork with one focused platform
+            designed around measurable growth.
+          </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+          <article class="feature reveal">
+            <div class="icon">⚡</div>
+
+            <h3>Launch faster</h3>
+
+            <p>
+              Build campaigns and customer experiences in minutes instead
+              of waiting weeks for development.
+            </p>
+          </article>
+
+
+          <article class="feature reveal">
+            <div class="icon">◉</div>
+
+            <h3>Understand visitors</h3>
+
+            <p>
+              See what your customers actually do and identify the moments
+              where you're losing valuable conversions.
+            </p>
+          </article>
+
+
+          <article class="feature reveal">
+            <div class="icon">↗</div>
+
+            <h3>Convert more traffic</h3>
+
+            <p>
+              Turn insights into experiments that continuously improve
+              your conversion rate and revenue.
+            </p>
+          </article>
+
+
+          <article class="feature reveal">
+            <div class="icon">✦</div>
+
+            <h3>Smart automation</h3>
+
+            <p>
+              Automate repetitive marketing workflows so your team can
+              focus on high-impact work.
+            </p>
+          </article>
+
+
+          <article class="feature reveal">
+            <div class="icon">⌁</div>
+
+            <h3>Real-time analytics</h3>
+
+            <p>
+              Track the metrics that matter with clean dashboards that
+              turn complicated data into useful decisions.
+            </p>
+          </article>
+
+
+          <article class="feature reveal">
+            <div class="icon">♢</div>
+
+            <h3>Built for teams</h3>
+
+            <p>
+              Collaborate effortlessly with permissions, shared insights,
+              comments, and centralized campaign management.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= RESULTS ================= -->
+
+    <section class="results" id="results">
+
+      <div class="container">
+
+        <div class="results-grid">
+
+          <div class="section-heading reveal">
+
+            <div class="section-label">
+              Results that matter
+            </div>
+
+            <h2>
+              Stop guessing.
+              <span class="gradient-text">
+                Start growing.
+              </span>
+            </h2>
+
+            <p>
+              Nova helps your team understand exactly what's working,
+              what isn't, and where your next opportunity is hiding.
+            </p>
+
+            <ul class="check-list">
+
+              <li>
+                <span class="check">✓</span>
+                Increase conversion rates with data-backed experiments.
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Identify your highest-value customers.
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Turn more traffic into predictable revenue.
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Make faster decisions with real-time insights.
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <div class="results-card reveal">
+
+            <div class="metric">
+
+              <div class="metric-info">
+                <span>Conversion rate</span>
+                <strong>8.42%</strong>
+              </div>
+
+              <div class="metric-change">
+                +32.8%
+              </div>
+
+            </div>
+
+            <div class="progress">
+              <span data-width="84%"></span>
+            </div>
+
+
+            <div class="metric">
+
+              <div class="metric-info">
+                <span>Customer retention</span>
+                <strong>91.4%</strong>
+              </div>
+
+              <div class="metric-change">
+                +18.2%
+              </div>
+
+            </div>
+
+            <div class="progress">
+              <span data-width="91%"></span>
+            </div>
+
+
+            <div class="metric">
+
+              <div class="metric-info">
+                <span>Revenue growth</span>
+                <strong>64.7%</strong>
+              </div>
+
+              <div class="metric-change">
+                +41.6%
+              </div>
+
+            </div>
+
+            <div class="progress">
+              <span data-width="65%"></span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= TESTIMONIAL ================= -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="testimonial reveal">
+
+          <div class="section-label">
+            Customer story
+          </div>
+
+          <div class="quote">
+            “Nova helped us stop making decisions based on assumptions.
+            Within three months, our conversion rate increased by
+            <span class="gradient-text">41%.</span>”
+          </div>
+
+          <div class="quote-author">
+            <strong>Sarah Mitchell</strong>
+            VP of Growth · Vertex Labs
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= PRICING ================= -->
+
+    <section id="pricing">
+
+      <div class="container">
+
+        <div class="section-heading center reveal">
+
+          <div class="section-label">
+            Simple pricing
+          </div>
+
+          <h2>
+            Start small.
+            <span class="gradient-text">Scale confidently.</span>
+          </h2>
+
+          <p>
+            Choose the plan that fits your stage. Upgrade whenever you're ready.
+          </p>
+
+        </div>
+
+
+        <div class="pricing-toggle">
+
+          <button class="toggle active" data-plan="monthly">
+            Monthly
+          </button>
+
+          <button class="toggle" data-plan="yearly">
+            Yearly
+            <span class="save">Save 20%</span>
+          </button>
+
+        </div>
+
+
+        <div class="pricing-grid">
+
+          <div class="price-card reveal">
+
+            <h3>Starter</h3>
+
+            <p>
+              For individuals getting started.
+            </p>
+
+            <div class="price">
+              $<span class="price-number" data-monthly="19" data-yearly="15">19</span>
+              <span>/month</span>
+            </div>
+
+            <ul>
+              <li>5,000 monthly visitors</li>
+              <li>Basic analytics</li>
+              <li>3 campaigns</li>
+              <li>Email support</li>
+            </ul>
+
+            <a href="#cta" class="btn btn-secondary">
+              Get started
+            </a>
+
+          </div>
+
+
+          <div class="price-card featured reveal">
+
+            <div class="popular">
+              MOST POPULAR
+            </div>
+
+            <h3>Growth</h3>
+
+            <p>
+              For teams serious about growth.
+            </p>
+
+            <div class="price">
+              $<span class="price-number" data-monthly="49" data-yearly="39">49</span>
+              <span>/month</span>
+            </div>
+
+            <ul>
+              <li>50,000 monthly visitors</li>
+              <li>Advanced analytics</li>
+              <li>Unlimited campaigns</li>
+              <li>A/B testing</li>
+              <li>Priority support</li>
+            </ul>
+
+            <a href="#cta" class="btn btn-primary">
+              Start free trial →
+            </a>
+
+          </div>
+
+
+          <div class="price-card reveal">
+
+            <h3>Scale</h3>
+
+            <p>
+              For growing companies.
+            </p>
+
+            <div class="price">
+              $<span class="price-number" data-monthly="99" data-yearly="79">99</span>
+              <span>/month</span>
+            </div>
+
+            <ul>
+              <li>Unlimited visitors</li>
+              <li>Advanced reporting</li>
+              <li>Team permissions</li>
+              <li>Custom integrations</li>
+              <li>Dedicated support</li>
+            </ul>
+
+            <a href="#cta" class="btn btn-secondary">
+              Talk to sales
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= FAQ ================= -->
+
+    <section id="faq">
+
+      <div class="container">
+
+        <div class="section-heading center reveal">
+
+          <div class="section-label">
+            FAQ
+          </div>
+
+          <h2>
+            Questions?
+            <span class="gradient-text">We've got answers.</span>
+          </h2>
+
+        </div>
+
+
+        <div class="faq">
+
+          <div class="faq-item reveal">
+
+            <button class="faq-question">
+              Is there a free trial?
+              <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+              Yes. Every plan starts with a 14-day free trial.
+              No credit card is required, and you can cancel at any time.
+            </div>
+
+          </div>
+
+
+          <div class="faq-item reveal">
+
+            <button class="faq-question">
+              Do I need technical knowledge?
+              <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+              No. Nova is designed for marketers, founders, and growth teams.
+              You can start without writing code.
+            </div>
+
+          </div>
+
+
+          <div class="faq-item reveal">
+
+            <button class="faq-question">
+              Can I upgrade later?
+              <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+              Absolutely. You can upgrade or downgrade your plan whenever
+              your business needs change.
+            </div>
+
+          </div>
+
+
+          <div class="faq-item reveal">
+
+            <button class="faq-question">
+              Is my data secure?
+              <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+              Security is built into the platform. Nova uses encryption,
+              secure infrastructure, and strict access controls to protect
+              your information.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta" id="cta">
+
+      <div class="container">
+
+        <div class="cta-box reveal">
+
+          <div class="section-label">
+            Your next growth phase starts here
+          </div>
+
+          <h2>
+            Ready to turn more visitors
+            into <span class="gradient-text">customers?</span>
+          </h2>
+
+          <p>
+            Join thousands of ambitious teams using Nova to build better
+            customer experiences and grow faster.
+          </p>
+
+          <a href="#" class="btn btn-primary">
+            Start your free trial →
+          </a>
+
+          <div class="trust">
+            14-day free trial · No credit card · Cancel anytime
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-content">
+
+        <div>
+          © 2026 Nova. All rights reserved.
+        </div>
+
+        <div class="footer-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    /* Header background on scroll */
+
+    const header = document.getElementById("header");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 30) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+
+    });
+
+
+    /* Mobile navigation */
+
+    const nav = document.getElementById("nav");
+    const mobileToggle = document.getElementById("mobileToggle");
+
+    mobileToggle.addEventListener("click", () => {
+      nav.classList.toggle("mobile-open");
+
+      mobileToggle.textContent =
+        nav.classList.contains("mobile-open") ? "×" : "☰";
+    });
+
+
+    /* Close mobile navigation when clicking a link */
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+      link.addEventListener("click", () => {
+        nav.classList.remove("mobile-open");
+        mobileToggle.textContent = "☰";
+      });
+
+    });
+
+
+    /* Scroll reveal */
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach((entry) => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add("visible");
+
+            revealObserver.unobserve(entry.target);
+
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    revealElements.forEach(element => {
+      revealObserver.observe(element);
+    });
+
+
+    /* Animate progress bars */
+
+    const progressBars = document.querySelectorAll(".progress span");
+
+    const progressObserver = new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            const width = entry.target.dataset.width;
+
+            entry.target.style.width = width;
+
+            progressObserver.unobserve(entry.target);
+
+          }
+
+        });
+
+      },
+      {
+        threshold: .4
+      }
+    );
+
+    progressBars.forEach(bar => {
+      progressObserver.observe(bar);
+    });
+
+
+    /* FAQ accordion */
+
+    document.querySelectorAll(".faq-question").forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        const currentItem = button.parentElement;
+
+        document.querySelectorAll(".faq-item").forEach(item => {
+
+          if (item !== currentItem) {
+            item.classList.remove("open");
+          }
+
+        });
+
+        currentItem.classList.toggle("open");
+
+      });
+
+    });
+
+
+    /* Pricing toggle */
+
+    const toggles = document.querySelectorAll(".toggle");
+    const prices = document.querySelectorAll(".price-number");
+
+    toggles.forEach(toggle => {
+
+      toggle.addEventListener("click", () => {
+
+        toggles.forEach(t => t.classList.remove("active"));
+
+        toggle.classList.add("active");
+
+        const plan = toggle.dataset.plan;
+
+        prices.forEach(price => {
+
+          price.textContent = price.dataset[plan];
+
+        });
+
+      });
+
+    });
+
+
+    /* Smooth button interaction */
+
+    document.querySelectorAll(".btn").forEach(button => {
+
+      button.addEventListener("click", function() {
+
+        this.style.transform = "scale(.97)";
+
+        setTimeout(() => {
+          this.style.transform = "";
+        }, 120);
+
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
