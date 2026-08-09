@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#635bff">
+<title>LearnFlow — Online Learning Platform</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="authScreen" class="auth-screen">
+  <div class="auth-card">
+    <div class="brand">Learn<span>Flow</span></div>
+    <p class="eyebrow">LEARN • PRACTICE • PROGRESS</p>
+    <h1>Your learning, in one flow.</h1>
+    <p class="muted">Watch lessons, complete quizzes, and track your progress.</p>
+    <form id="loginForm">
+      <input id="nameInput" placeholder="Your name" required>
+      <input id="emailInput" type="email" placeholder="Email address" required>
+      <input id="passwordInput" type="password" placeholder="Password" minlength="6" required>
+      <button class="primary full">Continue learning →</button>
+    </form>
+    <small>Demo authentication: accounts are stored locally in your browser.</small>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+<header class="topbar">
+  <a class="brand" href="#">Learn<span>Flow</span></a>
+  <nav>
+    <button data-view="dashboard" class="nav-btn active">Dashboard</button>
+    <button data-view="courses" class="nav-btn">Courses</button>
+    <button data-view="progress" class="nav-btn">My Progress</button>
+  </nav>
+  <div class="profile"><span id="avatar">LP</span><div><b id="userName">Learner</b><small id="userEmail"></small></div><button id="logout" class="icon-btn">↪</button></div>
+</header>
+
+<main>
+<section id="dashboardView" class="view">
+  <div class="welcome">
+    <div><p class="eyebrow">STUDENT DASHBOARD</p><h1>Keep going, <span id="welcomeName">Learner</span>.</h1><p class="muted">Pick up where you left off and build your skills one lesson at a time.</p></div>
+    <div class="streak"><strong id="streak">3</strong><span>day streak 🔥</span></div>
+  </div>
+  <div class="stats">
+    <div><span>Courses</span><strong id="statCourses">3</strong></div>
+    <div><span>Lessons done</span><strong id="statLessons">0</strong></div>
+    <div><span>Quiz score</span><strong id="statScore">0%</strong></div>
+    <div><span>Learning time</span><strong id="statTime">0m</strong></div>
+  </div>
+  <div class="section-title"><h2>Continue learning</h2><button data-view="courses" class="link-btn">View all →</button></div>
+  <div id="continueGrid" class="course-grid"></div>
+</section>
+
+<section id="coursesView" class="view hidden">
+  <div class="section-title"><div><p class="eyebrow">LIBRARY</p><h1>Explore courses</h1></div><input id="courseSearch" class="search" placeholder="Search courses..."></div>
+  <div id="courseGrid" class="course-grid"></div>
+</section>
+
+<section id="lessonView" class="view hidden">
+  <button id="backCourses" class="back">← Back to courses</button>
+  <div class="lesson-layout">
+    <div>
+      <div class="video-shell">
+        <video id="lessonVideo" controls playsinline preload="metadata" poster="">
+          <source id="videoSource" src="" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+        <div id="videoFallback" class="video-fallback hidden">Demo video unavailable. The lesson can still be marked complete below.</div>
+      </div>
+      <div class="lesson-copy"><p id="lessonCourse" class="eyebrow"></p><h1 id="lessonTitle"></h1><p id="lessonDescription" class="muted"></p></div>
+      <div class="lesson-actions"><button id="completeLesson" class="primary">✓ Mark lesson complete</button><button id="nextLesson" class="secondary">Next lesson →</button></div>
+    </div>
+    <aside class="lesson-sidebar"><h3>Course curriculum</h3><div id="lessonList"></div></aside>
+  </div>
+</section>
+
+<section id="quizView" class="view hidden">
+  <button id="backLesson" class="back">← Back to lesson</button>
+  <div class="quiz-card"><p class="eyebrow">QUICK CHECK</p><h1 id="quizTitle"></h1><p class="muted">Answer the question to continue.</p><div id="quizQuestion"></div><button id="submitQuiz" class="primary">Submit answer</button><div id="quizResult"></div></div>
+</section>
+
+<section id="progressView" class="view hidden">
+  <div class="section-title"><div><p class="eyebrow">YOUR JOURNEY</p><h1>My progress</h1></div></div>
+  <div class="progress-hero"><div><span>Overall completion</span><strong id="overallProgress">0%</strong></div><div class="progress-bar"><i id="overallBar"></i></div></div>
+  <div id="progressList" class="progress-list"></div>
+</section>
+</main>
+<footer>LearnFlow Demo • Media Streaming • Authentication • Data Storage</footer>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

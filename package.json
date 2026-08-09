@@ -1,0 +1,8 @@
+{
+  "name":"learnflow-platform",
+  "version":"1.0.0",
+  "description":"Student-friendly online learning platform with video lessons, quizzes, authentication and progress tracking.",
+  "main":"server.js",
+  "scripts":{"start":"node server.js","dev":"node --watch server.js"},
+  "dependencies":{"bcryptjs":"^3.0.2","better-sqlite3":"^11.10.0","express":"^5.1.0","jsonwebtoken":"^9.0.2"}
+}

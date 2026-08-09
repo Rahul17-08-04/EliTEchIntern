@@ -1,25 +1,62 @@
-# Shoply — Offline E-Commerce PWA
+# LearnFlow — Online Learning Platform
 
-Responsive installable PWA demonstrating Service Worker, Cache API, offline shell, localStorage cart persistence, install prompt, and Web Push client/service-worker handlers.
+A student-friendly learning platform demo focused on:
+
+- Video lessons and HTML5 media streaming
+- User authentication
+- Persistent progress tracking
+- Quiz assessments
+- Responsive UI
+- SQLite data storage
+- JWT authentication API
 
 ## Run
 
-Service Workers require HTTPS or localhost. From this folder run:
-
 ```bash
-python -m http.server 5500
+npm install
+npm start
 ```
 
-Open `http://localhost:5500`.
+Open:
 
-## Offline test
-1. Load the app once online.
-2. DevTools → Application → Service Workers: confirm `sw.js` is registered.
-3. DevTools → Network → Offline.
-4. Reload. Cached app shell remains available.
+```text
+http://localhost:3000
+```
 
-## Push notifications
-The UI requests notification permission and the Service Worker handles `push` and `notificationclick`. For real push delivery, generate VAPID keys, put only the public key in `app.js`, send subscriptions to a secure backend, and send Web Push messages from that backend. Never expose the VAPID private key.
+## Demo login
+
+The current frontend uses local browser authentication for an immediately runnable demo. The Express API also provides production-oriented register/login/progress endpoints.
+
+### API endpoints
+
+- `POST /api/register`
+- `POST /api/login`
+- `GET /api/progress`
+- `POST /api/progress`
+
+## Database
+
+SQLite is created automatically as `learnflow.db`.
+
+Tables:
+
+- `users`
+- `progress`
+
+## Video streaming
+
+The frontend uses the HTML5 `<video>` element with MP4 URLs. In a production platform, replace the demo video URLs with your own CDN/object-storage URLs or a protected streaming service.
+
+For large libraries, use HLS/DASH and CDN delivery rather than serving large MP4 files directly from Express.
 
 ## Production improvements
-Use HTTPS, IndexedDB for larger offline catalogs/orders, API/database-backed products, authenticated checkout, real 192x192/512x512 PNG icons, and version the cache whenever assets change.
+
+- Connect frontend login to the API instead of local demo authentication.
+- Store JWT securely (prefer an HTTP-only cookie for browser sessions).
+- Add refresh-token/session handling.
+- Add role-based access for instructors/admins.
+- Store videos in object storage and deliver through a CDN.
+- Use HLS/DASH for adaptive streaming.
+- Add signed video URLs for protected lessons.
+- Add server-side progress synchronization.
+- Add rate limiting, validation, CSRF protection where applicable, HTTPS, and secure headers.
