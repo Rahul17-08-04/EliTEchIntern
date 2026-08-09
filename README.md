@@ -1,62 +1,25 @@
-# Modern Animated Personal Portfolio
+# Shoply — Offline E-Commerce PWA
 
-A responsive personal portfolio built with:
+Responsive installable PWA demonstrating Service Worker, Cache API, offline shell, localStorage cart persistence, install prompt, and Web Push client/service-worker handlers.
 
-- HTML5
-- Modern CSS
-- Vanilla JavaScript
-- GSAP + ScrollTrigger
-- Three.js
-- Google Fonts
+## Run
 
-## Folder structure
-
-```text
-portfolio-website/
-├── index.html
-├── style.css
-├── script.js
-└── README.md
-```
-
-## Run locally
-
-### Option 1 — VS Code Live Server
-
-1. Open this folder in VS Code.
-2. Install the **Live Server** extension.
-3. Right-click `index.html`.
-4. Select **Open with Live Server**.
-
-### Option 2 — Python server
-
-Open a terminal inside the project folder:
+Service Workers require HTTPS or localhost. From this folder run:
 
 ```bash
 python -m http.server 5500
 ```
 
-Then open:
+Open `http://localhost:5500`.
 
-```text
-http://localhost:5500
-```
+## Offline test
+1. Load the app once online.
+2. DevTools → Application → Service Workers: confirm `sw.js` is registered.
+3. DevTools → Network → Offline.
+4. Reload. Cached app shell remains available.
 
-## Customize
+## Push notifications
+The UI requests notification permission and the Service Worker handles `push` and `notificationclick`. For real push delivery, generate VAPID keys, put only the public key in `app.js`, send subscriptions to a secure backend, and send Web Push messages from that backend. Never expose the VAPID private key.
 
-Edit `index.html` to replace:
-
-- Name
-- Email
-- LinkedIn URL
-- GitHub URL
-- Project descriptions
-- Project links
-
-Edit `style.css` to change the main accent:
-
-```css
---accent: #c7ff39;
-```
-
-The Three.js particle background and GSAP animations are loaded from CDN, so an internet connection is required when running the page.
+## Production improvements
+Use HTTPS, IndexedDB for larger offline catalogs/orders, API/database-backed products, authenticated checkout, real 192x192/512x512 PNG icons, and version the cache whenever assets change.
